@@ -84,7 +84,9 @@
                 const thresholdRange = maxThreshold - minThreshold
 
                 const colors = d3.scaleLinear()
-                    .domain(d3.range(minThreshold, maxThreshold, thresholdRange/binCount))
+                    // .domain(d3.range(minThreshold, maxThreshold, thresholdRange/binCount))
+                    .domain(d3.range(minValue,maxValue, 0.5*(maxValue-minValue)/(binCount)))
+                    // I updated the domain of the color scale to use the full data range (minValue to maxValue) with a step size of 0.5 * (maxValue - minValue) / binCount, instead of relying on the thresholds (minThreshold and maxThreshold). This ensures the color scale reflects the entire dataset's range consistently, addressing the feedback that the domain should not depend on the adjustable thresholds.
                     .range(["#0d1a50", "#3e5eba", "#2b83ba", "#abdda4", "#ffffbf", "#fdae61", "#d7191c"])
                     .interpolate(d3.interpolateHcl);
 
